@@ -1,0 +1,25 @@
+.form-center {
+    max-width: 500px;
+    background-color: lightgrey;
+    margin: auto;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.input-style {
+    border-radius: 20px;
+}
+
+.button-style {
+    width: 200px !important;
+    border-radius: 20px;
+}
+
+.label-style {
+    margin-left: 5px;
+}
+
+.btn {
+    width: 90px;
+}

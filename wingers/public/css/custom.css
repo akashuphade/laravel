@@ -1,0 +1,25 @@
+.custom-nav {
+    font-weight: bolder;
+    color: white !important;
+}
+
+.custom-nav-back {
+    background-color: #ff000080 !important;
+}
+
+#footer {
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    height: 50px;
+    background-color: #dc6262 !important;
+}
+
+.container-wrap {
+    position: relative;
+    min-height: 91vh;
+}
+
+.btn {
+    border-radius: 20px;
+}
