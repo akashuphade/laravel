@@ -24,7 +24,7 @@
 
 .container-wrap {
     position: relative;
-    min-height: 91vh;
+    min-height: 80vh;
     background-color: #dcbbbb;
 }
 
@@ -32,7 +32,7 @@
     border-radius: 20px;
 }
 
-.card {
+.card-custom {
     background-color: #ded3d3;
     border-radius: 3.25rem;
 }

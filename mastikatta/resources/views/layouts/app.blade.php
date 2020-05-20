@@ -24,7 +24,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm custom-nav-back">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     <img src="/storage/logo.png" alt="" height="50px"> 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -50,6 +50,16 @@
                                 </li>
                             @endif
                         @else
+
+                            <li class="nav-item dropdown">
+                                <a id="slambookDropdown" class="nav-link dropdown-toggle custom-nav" href="#" role="button" data-toggle="dropdown">
+                                    Slambook <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="slambookDropdown">
+                                    <a class="dropdown-item" href="/questions">Questions</a>
+                                    <a class="dropdown-item" href="">Responses</a>
+                                </div>   
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle custom-nav" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
