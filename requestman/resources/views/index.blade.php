@@ -27,7 +27,7 @@
                         <td>{{date('d-m-Y H:i:s', strtotime($student->created_at))}}</td>
                         <td>{{date('d-m-Y H:i:s', strtotime($student->updated_at))}}</td>
                         <td>    
-                            <a href="/request/{{$student->id}}/edit" class="btn btn-secondary">Edit</a>
+                            <a href="request/{{$student->id}}/edit" class="btn btn-secondary">Edit</a>
                             <form method="post" action="/request/{{$student->id}}">
                                 @csrf 
                                 @method('DELETE')

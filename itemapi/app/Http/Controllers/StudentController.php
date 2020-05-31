@@ -8,15 +8,20 @@ use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //Get records to show per page
+        $perPage = $request->input('perPage');
+        
         //Get all students
-        $students = Student::get();
+        $students = Student::paginate($perPage);
+        
         return response()->json($students);
     }
 
@@ -70,10 +75,11 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         //Validate the request
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email|unique:students,email',
+            'email' => 'required|email',
             'class' => 'required'
         ]);
 

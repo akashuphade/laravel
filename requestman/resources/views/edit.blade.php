@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-{{$student->name}}
+
     <div class="row justify-content-center">
         <div class="card col-md-8">
             <div class="card-header text-center"><h3 class="text-info">Edit Student</h3></div>
             <div class="card-body">
-                <form method="POST" action="/request">
+                <form method="POST" action="/request/{{$student->id}}">
 
                     @csrf 
+                    @method('PUT')
                     <div class="form-group row">
                         <label for="name" class="col-form-label col-md-4 text-md-right">Name</label>
                         <div class="col-md-6">
-                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="">
+                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') ? old('name') : $student->name }}">
 
                             @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -26,7 +27,7 @@
                     <div class="form-group row">
                         <label for="email" class="col-form-label col-md-4 text-md-right">E-mail</label>
                         <div class="col-md-6">
-                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}">
+                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') ? old('email') : $student->email }}">
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -40,7 +41,7 @@
                     <div class="form-group row">
                         <label for="class" class="col-form-label col-md-4 text-md-right">Class</label>
                         <div class="col-md-6">
-                            <input type="number" id="class" name="class" class="form-control @error('class') is-invalid @enderror" min="0" value="{{old('class')}}">
+                            <input type="number" id="class" name="class" class="form-control @error('class') is-invalid @enderror" min="0" value="{{ old('class') ? old('class') : $student->class }}">
 
                             @error('class')
                             <span class="invalid-feedback" role="alert">

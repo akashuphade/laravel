@@ -18,8 +18,7 @@ class RequestController extends Controller
         $client = new Client();
         $response = $client->get('http://dev.itemapi.ak/api/students');
         $students = json_decode($response->getBody()->getContents());
-                
-        return view('index')->with('students', $students);
+        return view('index')->with('students', $students->data);
     }
 
     /**
@@ -102,8 +101,7 @@ class RequestController extends Controller
 
         //Get student data
         $response = $client->get('http://dev.itemapi.ak/api/students/'.$id);
-        $student = json_decode($response->getBody()->getContents(), true);
-        //dd($student);
+        $student = json_decode($response->getBody()->getContents());
         return view('edit')->with('student', $student);
     }
 
@@ -116,7 +114,44 @@ class RequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        //validate inputs
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'class' => 'required|numeric'
+        ]);
+
+        $client = new Client();
+        
+        try {
+            $response = $client->put('http://dev.itemapi.ak/api/students/'.$id, 
+                array(
+                    'form_params' => array(
+                        'name' => $request->input('name'),
+                        'email' => $request->input('email'),
+                        'class' => $request->input('class')
+                    )
+                )  
+            );
+
+            $checkError = json_decode($response->getBody()->getContents(), true);
+            
+            if(!empty($checkError['success'])) {
+                return redirect()->to('/')->with('error', 'Student cannot be Updated - '.json_encode($checkError['response']));    
+            }
+            
+        } catch(RequestException $e) {
+            if ($e->hasResponse()) {
+                $msg = $e->getResponse();
+            } else {
+                $msg = "The student could not be updated.";
+            }
+
+            return redirect()->to('/')->with('error', $msg);
+        }    
+
+        return redirect()->to('/')->with('success', "Student updated successfully!!");
     }
 
     /**
@@ -127,6 +162,27 @@ class RequestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = new Client();
+        
+        try {
+            $response = $client->delete('http://dev.itemapi.ak/api/students/'.$id);
+
+            $checkError = json_decode($response->getBody()->getContents(), true);
+            
+            if($checkError['success'] === false) {
+                return redirect()->to('/')->with('error', 'Student cannot be Deleted - '.json_encode($checkError['response']));    
+            }
+            
+        } catch(RequestException $e) {
+            if ($e->hasResponse()) {
+                $msg = $e->getResponse();
+            } else {
+                $msg = "The student could not be Deleted.";
+            }
+
+            return redirect()->to('/')->with('error', $msg);
+        }    
+
+        return redirect()->to('/')->with('success', "Student deleted successfully!!");
     }
 }
