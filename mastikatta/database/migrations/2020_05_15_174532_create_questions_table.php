@@ -17,8 +17,8 @@ class CreateQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('description');
             $table->string('type');
-            $table->tinyinteger('required');
             $table->tinyinteger('visible');
+            $table->tinyinteger('isSystem');
             $table->timestamps();
         });
     }

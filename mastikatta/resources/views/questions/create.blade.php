@@ -30,7 +30,6 @@
                                 <option value="longtext">Longtext</option>
                                 <option value="date">Date</option>
                                 <option value="email">E-mail</option>
-                                <option value="file">File</option>
                             </select>
 
                             @error('type')
@@ -39,20 +38,6 @@
                             </span>
                             @enderror
 
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="required" class="col-md-4 col-form-label text-md-right">Required</label>
-                        <div class="col-md-6 mt-2">
-                            
-                            <input type="checkbox" style="width:25px; height:25px;" class="@error('required') is-invalid @enderror" name="required" id="required" checked>
-                            
-                            @error('required')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
                         </div>
                     </div>
 

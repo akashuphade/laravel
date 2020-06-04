@@ -61,18 +61,13 @@ class QuestionController extends Controller
         $question->description = $request->input('question');
         $question->type = $request->input('type');
 
-        if(!empty($request->input('required'))) {
-            $question->required = 1;
-        } else {
-            $question->required = 0;
-        }
-
         if(!empty($request->input('visible'))) {
             $question->visible = 1;
         } else {
             $question->visible = 0;
         }
-
+        $question->isSystem = 1;
+        
         $question->save();
 
         return redirect('questions')->with('success','Question added successfully');

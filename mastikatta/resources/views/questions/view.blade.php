@@ -16,8 +16,8 @@
                     <thead>
                         <tr class="text-center">
                             <th width="50%">Question</th>
-                            <th width="25%">Required</th>
                             <th width="25%">Visible</th>
+                            <th width="25%">System</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,26 +26,29 @@
                         <tr>
                             <td>{{$question->description}}</td>
                             <td class="text-center">
-                                <select class="form-control" name="required_{{$question->id}}">
-                                    <option value=1 @if($question->required == 1) Selected @endif >Yes</option>
-                                    <option value=0 @if($question->required == 0) Selected @endif >No</option>
-                                </select>    
-                            </td>
-                            <td class="text-center">
-                                <select class="form-control" name="visible_{{$question->id}}">
+                                <select class="form-control" name="visible_{{$question->id}}" {{ Auth::user()->isAdmin == 1 ? '' : 'disabled' }}>
                                     <option value=1 @if($question->visible == 1) Selected @endif >Yes</option>
                                     <option value=0 @if($question->visible == 0) Selected @endif >No</option>
                                 </select>
-                            </th>
+                            </td>
+                            <td class="text-center">
+                                <select class="form-control" name="visible_{{$question->id}}" {{ Auth::user()->isAdmin == 1 ? '' : 'disabled' }}>
+                                    <option value=1 @if($question->isSystem == 1) Selected @endif >Yes</option>
+                                    <option value=0 @if($question->isSystem == 0) Selected @endif >No</option>
+                                </select>
+                            </td>
+                        </tr>
                         @endforeach
                         
                     </tbody>
                 </table>
 
+            @if(Auth::user()->isAdmin == 1 )
                 <div class="row justify-content-center border-0">
                     <a href="questions/create" class="btn btn-primary mr-1">Add</a>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
+            @endif
             </form>
 
         </div>
