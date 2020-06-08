@@ -52,6 +52,7 @@ class ArticleController extends Controller
             return response()->json($e->getMessage());
         }
         return new ArticleResource($article);
+        
     }
     /**
      * Update the specified resource in storage.
